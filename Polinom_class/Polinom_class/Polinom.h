@@ -16,28 +16,56 @@ public:
 			polinom[i] = r[i];
 		}
 		int pos = 0;
-		const int max = 20;
-		char *k = new char[max];
-		for (int z = 0; z < max; z++)
+		while (pos != length)
 		{
-			k[z] = ' ';
+			char *buff;
+			buff = new char[length];
+			int sizeMonom = 0;
+			buff[sizeMonom] = polinom[pos];
+			sizeMonom++; pos++;
+			while ((!(polinom[pos] == '-' || polinom[pos] == '+'))&&pos!=length)
+			{
+				buff[sizeMonom] = polinom[pos];
+				sizeMonom++; pos++;
+			}
+			a.add(buff);
+			delete buff;
 		}
-		if (polinom[0] == '-')
+	}
+	void print()
+	{
+		Monom *t = a.head();
+		while (t)
 		{
-			k[0] = '-';
-			pos++;
-			while (polinom[pos] != '-' || polinom[pos] != '+')
+			cout << "Verstka: " << t->verstka << "koef:  " << t->k << endl;
+			t = t->next;
+		}
+	}
+	Polinom operator=(Polinom &b)
+	{
+		this->a = b.a;
+		this->polinom = b.polinom;
+		return *this;
+	}
+	Polinom operator+ (Polinom &b)
+	{
+		Monom *f = this->a.head();
+		Monom *t = b.a.head();
+		while (t)
+		{
+			while (f)
 			{
-				k[pos] = polinom[pos];
-				pos++;
+				if (t->verstka == f->verstka)
+				{
+					t->verstka += f->verstka;
+				}
+				f = f->next;
 			}
-			a.add(k);
-			for (int z = 0; z < max; z++)
-			{
-				k[z] = ' ';
-			}
+			t = t->next;
 		}
 
+		this->a.check();
+		return *this;
 	}
 	~Polinom();
 };

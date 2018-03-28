@@ -9,7 +9,6 @@ struct Monom
 	int k;
 	Monom *next;
 };
-
 class MonomList
 {
 protected:
@@ -25,7 +24,7 @@ public:
 		int pos = 0;
 		char *a;
 		a = new char[length];
-		for (int i = 0; i <= length; i++)
+		for (int i = 0; i < length; i++)
 		{
 			a[i] = t[i];
 		}
@@ -46,7 +45,7 @@ public:
 			{
 				string str = "";
 				pos++;
-				while (a[pos] != 'x')
+				while (!(a[pos] == 'x' || a[pos] == 'y' || a[pos] == 'z'))
 				{
 					str = str + a[pos];
 					pos++;
@@ -54,12 +53,22 @@ public:
 				kk = atoi(str.c_str());
 				kk *= -1;
 			}
+			if (a[pos] >= '0' && a[pos] <= '9')
+			{
+				string str;
+				while (!(a[pos] == 'x' || a[pos] == 'y' || a[pos] == 'z'))
+				{
+					str = str + a[pos];
+					pos++;
+				}
+				kk = atoi(str.c_str());
+			}
 			if (a[pos] == 'x')
 			{
 				pos++;
 				string str;
 				int k = 0;
-				while (a[pos] != 'y')
+				while (!(a[pos] == 'y' || a[pos] == 'z' || pos == length))
 				{
 					str = str + a[pos];
 					pos++;
@@ -72,7 +81,7 @@ public:
 				pos++;
 				string str = "";
 				int k;
-				while (a[pos] != 'z')
+				while (!(a[pos] == 'x' || a[pos] == 'z' || pos == length))
 				{
 					str = str + a[pos];
 					pos++;
@@ -85,7 +94,7 @@ public:
 				pos++;
 				string str = "";
 				int k;
-				while (pos != length)
+				while (!(a[pos] == 'y' || a[pos] == 'x' || pos == length))
 				{
 					str = str + a[pos];
 					pos++;
@@ -140,16 +149,36 @@ public:
 	}
 	void check()
 	{
-		if (h->k == 0)
+		if (h->k == 0 && h->next != NULL)
 		{
 			Monom *t = h;
 			h = h->next;
 			delete t;
 		}
-		if (h->next != NULL)
+		if (h->next != NULL&&h->next->next != NULL)
 		{
-			Monom *t = h->next;
-			Monom *p = t;
+			Monom *ex = h;
+			Monom *n = ex->next;
+			while (n->next != NULL)
+			{
+				if (n->k == 0)
+				{
+					Monom *r = n;
+					n = n->next;
+					ex->next = n;
+					delete r;
+				}
+				else
+				{
+					n = n->next;
+					ex = ex->next;
+				}
+			}
+			if (n->next == NULL&&n->k == 0)
+			{
+				delete n;
+				ex->next = NULL;
+			}
 		}
 	}
 	void print()
@@ -170,5 +199,19 @@ public:
 			h = h->next;
 			delete t;
 		}
+	}
+	Monom *head()
+	{
+		return h;
+	}
+	MonomList operator=(MonomList &mon)
+	{
+		if (this->h == mon.h) return *this;
+		else
+		{
+			this->~MonomList();
+			this->h = mon.h;
+		}
+		return *this;
 	}
 };

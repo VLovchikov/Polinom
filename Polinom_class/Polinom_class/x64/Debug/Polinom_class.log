@@ -1,0 +1,16 @@
+﻿Build started 28.03.2018 16:00:06.
+     1>Project "C:\Users\Анастасия\Desktop\Polinom-master\Polinom_class\Polinom_class\Polinom_class.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Users\Анастасия\Desktop\Polinom-master\MonomList\MonomList" /Zi /nologo /W3 /WX- /sdl /Od /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt main.cpp
+         main.cpp
+     1>C:\Users\Анастасия\Desktop\Polinom-master\MonomList\MonomList\MonomList.h(23): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>c:\users\анастасия\desktop\polinom-master\polinom_class\polinom_class\Polinom.h(12): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Анастасия\Desktop\Polinom-master\Polinom_class\x64\Debug\Polinom_class.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\Users\Анастасия\Desktop\Polinom-master\Polinom_class\x64\Debug\Polinom_class.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Анастасия\Desktop\Polinom-master\Polinom_class\x64\Debug\Polinom_class.lib" /MACHINE:X64 x64\Debug\main.obj
+         x64\Debug\Polinom.obj
+         Polinom_class.vcxproj -> C:\Users\Анастасия\Desktop\Polinom-master\Polinom_class\x64\Debug\Polinom_class.exe
+     1>Done Building Project "C:\Users\Анастасия\Desktop\Polinom-master\Polinom_class\Polinom_class\Polinom_class.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.45
