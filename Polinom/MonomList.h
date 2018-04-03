@@ -11,9 +11,8 @@ struct Monom
 };
 class MonomList
 {
-protected:
-	Monom *h;
 public:
+	Monom *h;
 	MonomList() { h = NULL; };
 	bool isEmpty() { return h == NULL; }
 	void add(char *t)
@@ -184,14 +183,16 @@ public:
 	void print()
 	{
 		Monom *t = h;
-		if (t == NULL) return ;
+		if (t == NULL) return;
 		while (t)
 		{
 			cout << "verstka= " << t->verstka << "  " << "koef= " << t->k << endl;
 			t = t->next;
 		}
 	}
-	~MonomList(){}
+	~MonomList()
+	{
+	}
 	Monom *head()
 	{
 		return h;
@@ -214,7 +215,11 @@ public:
 		while (m)
 		{
 			this->copy(th, m);
-			if (m->next == NULL) return *this;
+			if (m->next == NULL)
+			{
+				th->next = NULL;
+				return *this;
+			}
 			if (th->next == NULL)
 			{
 				th->next = new Monom;
@@ -224,7 +229,6 @@ public:
 			th->k = 0;
 			th->verstka = 0;
 			th->next = NULL;
-			
 		}
 		return *this;
 	}

@@ -1,0 +1,4 @@
+﻿  TestMonom.cpp
+a:\проекты\polinom\polinom\polinom\monomlist.h(22): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  Unittest.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Unittest.exe
+  Unittest.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Unittest.pdb (Full PDB)

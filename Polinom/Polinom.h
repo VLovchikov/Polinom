@@ -2,13 +2,20 @@
 #include <iostream>
 #include "MonomList.h"
 
+using namespace std;
+
 class Polinom
 {
 	MonomList a;
 	char *polinom;
 	int length;
 public:
-	Polinom();
+	Polinom()
+	{
+		MonomList();
+		length = 0;
+		polinom = NULL;
+	}
 	Polinom(char *r)
 	{
 		length = strlen(r);
@@ -34,8 +41,25 @@ public:
 			delete buff;
 		}
 	}
+	Polinom(Monom *mon)
+	{
+		this->a.h = mon;
+	}
+	~Polinom()
+	{
+		delete [] polinom;
+		Monom *t = this->a.h;
+		while (t)
+		{
+			Monom *tt = t;
+			t = t->next;
+			delete tt;
+		}
+		delete t;
+	};
 	void print()
 	{
+		if (this->length == 0) return;
 		a.print();
 	}
 	Polinom operator=(Polinom &b)
@@ -125,37 +149,59 @@ public:
 	Polinom operator *(Polinom &pol)
 	{
 		Monom *th = this->a.head();
-		Monom *mon = pol.a.head();
-		
-		Polinom p = *this;
-		p.a.clean();
-		p.print();
-		Monom *pp = p.a.head();
+		Monom *mn;
+		Monom *pp = new Monom;
+		pp->next = NULL;
+		Polinom p(pp);
 		while (th)
 		{
-			mon = pol.a.head();
-			while (mon)
+			mn = pol.a.head();
+			while (mn)
 			{
-				cout << "th=  " << th->verstka  << "  " << th->k << endl;;
-				cout << "mon= " << mon->verstka << "  " << mon->k << endl;
-				pp->k = th->k*mon->k;
-				pp->verstka = th->verstka + mon->verstka;
-				if ((mon->next&&th->next) == NULL) return *this;
-				if (pp->next == NULL)
+				pp->k = th->k*mn->k;
+				pp->verstka = th->verstka + mn->verstka;
+				mn = mn->next;
+				if (mn == NULL&&th->next== NULL)
 				{
-					pp->next = new  Monom;
-					pp = pp->next;
+					pp->next = NULL;
+					p.a.check();
+					p.a.sort();
+					return *this=p;
 				}
 				else
 				{
+					pp->next = new Monom;
 					pp = pp->next;
 				}
-				mon = mon->next;
 			}
-			th = th->next;
+			th =th->next;
 		}
+		pp->next = NULL;
+		p.print();
+		p.a.check();
+		p.a.sort();
 		return p;
 	}
-	~Polinom();
+	double Calculate(int xx, int yy, int zz)
+	{
+		double  total = 0;
+		Monom *t = this->a.head();
+		int x = xx;
+		int y = yy;
+		int z = zz;
+		while (t)
+		{
+			int grz=0;
+			int gry=0;
+			int grx=0;
+			grz = t->verstka / 400;
+			gry = (t->verstka - 400 * grz) / 20;
+			grx = t->verstka - (400 * grz + 20 * gry);
+			total +=pow(x,grz) * pow(y,gry) * pow(z,grz)*t->k;
+			cout << "total= " << total <<"  t->koef=  "<<t->k<<"  grz=" << grz << "  gry= " << gry << "  grx= " <<grx << endl;
+			t = t->next;
+		}
+		return total;
+	}
 };
 
