@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include "MonomList.h"
+#include <string>
+
 
 using namespace std;
 
@@ -100,6 +102,12 @@ public:
 				}
 				mon = mon->next;
 			}
+			if (th->next == NULL)
+			{
+				this->a.check();
+				this->a.sort();
+				return *this;
+			}
 			count++;
 			int i = 0;
 			while (i != count)
@@ -134,6 +142,12 @@ public:
 					count++;
 				}
 				mon = mon->next;
+			}
+			if (th->next == NULL)
+			{
+				this->a.check();
+				this->a.sort();
+				return *this;
 			}
 			count++;
 			int i = 0;
@@ -197,11 +211,33 @@ public:
 			grz = t->verstka / 400;
 			gry = (t->verstka - 400 * grz) / 20;
 			grx = t->verstka - (400 * grz + 20 * gry);
-			total +=pow(x,grz) * pow(y,gry) * pow(z,grz)*t->k;
-			cout << "total= " << total <<"  t->koef=  "<<t->k<<"  grz=" << grz << "  gry= " << gry << "  grx= " <<grx << endl;
+			total +=pow(x,grx) * pow(y,gry) * pow(z,grz)*t->k;
 			t = t->next;
 		}
 		return total;
+	}
+	string ReverseConvert()
+	{
+		Monom *t = a.head();
+		string str = "";
+		while (t)
+		{
+			string k="";
+			if (t->k > 0)k = k + "+";
+			k = k + to_string(t->k);
+			int grz=t->verstka/400;
+			int gry=(t->verstka-grz*400)/20;
+			int grx=t->verstka-grz*400-gry*20;
+			k = k + "x";
+			k = k + to_string(grx);
+			k = k + "y";
+			k = k + to_string(gry);
+			k = k + "z";
+			k = k + to_string(grz);
+			str = str + k;
+			t = t->next;
+		}
+		return str;
 	}
 };
 

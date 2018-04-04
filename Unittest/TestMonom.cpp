@@ -67,4 +67,38 @@ TEST(MonomList, can_print_Monom)
 	ASSERT_NO_THROW(a.print());
 }
 
+TEST(MonomList, can_eq_Monom_is_empty)
+{
+	MonomList a;
+	a.add("-1009x1y2z3");
+	MonomList b;
+	ASSERT_NO_THROW(b = a);
+}
 
+
+TEST(MonomList, can_eq_Monom_if_is_empty_Monom)
+{
+	MonomList a;
+	a.add("-1009x1y2z3");
+	MonomList b;
+	ASSERT_NO_THROW(a = b);
+}
+
+TEST(MonomList, can_sort)
+{
+	MonomList a;
+	a.add("-100x1y2z3");
+	a.add("-109x1y2z2");
+	a.add("19x1y2z1");
+	ASSERT_NO_THROW(a.sort());
+}
+
+TEST(MonomList, true_sort)
+{
+	MonomList a;
+	a.add("-100x1y2z3");
+	a.add("-109x1y2z2");
+	a.add("19x1y2z1");
+	a.sort();
+	ASSERT_NO_THROW(a.print());
+}

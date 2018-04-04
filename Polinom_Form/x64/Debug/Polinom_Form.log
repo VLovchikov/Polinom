@@ -1,0 +1,7 @@
+﻿  MyForm.cpp
+A:\Проекты\Polinom\Polinom\Polinom\MonomList.h(22): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+A:\Проекты\Polinom\Polinom\Polinom\Polinom.h(21): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+MyForm.cpp(7): error C2976: std::array: слишком мало аргументов шаблон
+  A:\Visual Studio\VC\include\utility(363): note:  см. объявление "std::array"
+MyForm.cpp(7): error C3699: ^: это косвенное обращение невозможно использовать для типа "std::array"
+  MyForm.cpp(7): note: для продолжения работы компилятор заменил "^" на "*"

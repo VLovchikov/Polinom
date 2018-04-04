@@ -203,6 +203,7 @@ public:
 		if (this->h == NULL&&mon.h != NULL)
 		{
 			h = new Monom;
+			h->next = NULL;
 		}
 		if (mon.h == NULL)
 		{

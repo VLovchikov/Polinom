@@ -1,13 +1,8 @@
-﻿  MonomList.cpp
+﻿  Polinom.cpp
 a:\проекты\polinom\polinom\polinom\monomlist.h(22): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+a:\проекты\polinom\polinom\polinom\polinom.h(21): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
   Создание кода...
-  Компиляция...
+  Пропуск... (изменения не обнаружены)
   main.cpp
-a:\проекты\polinom\polinom\polinom\monomlist.h(22): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-a:\проекты\polinom\polinom\polinom\polinom.h(21): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-  Polinom.cpp
-a:\проекты\polinom\polinom\polinom\monomlist.h(22): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-a:\проекты\polinom\polinom\polinom\polinom.h(21): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-  Создание кода...
   Polinom.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Polinom.exe
   Polinom.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Polinom.pdb (Partial PDB)
