@@ -49,25 +49,18 @@ public:
 	}
 	~Polinom()
 	{
-		delete [] polinom;
-		Monom *t = this->a.h;
-		while (t)
-		{
-			Monom *tt = t;
-			t = t->next;
-			delete tt;
-		}
-		delete t;
+		
 	};
 	void print()
 	{
-		if (this->length == 0) return;
+		if (this->a.head() == NULL) return;
 		a.print();
 	}
 	Polinom operator=(Polinom &b)
 	{
+		if (this->a.h == b.a.h) return *this;
 		this->a = b.a;
-		delete this->polinom;
+		delete [] this->polinom;
 		this->length = b.length;
 		this->polinom = new char[b.length];
 		int pos = 0;
@@ -194,7 +187,8 @@ public:
 		p.print();
 		p.a.check();
 		p.a.sort();
-		return p;
+		*this = p;
+		return *this;
 	}
 	double Calculate(int xx, int yy, int zz)
 	{

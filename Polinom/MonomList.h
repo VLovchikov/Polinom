@@ -202,8 +202,8 @@ public:
 		if (this->h == mon.h) return *this;
 		if (this->h == NULL&&mon.h != NULL)
 		{
-			h = new Monom;
-			h->next = NULL;
+			this->h = new Monom;
+			this->h->next = NULL;
 		}
 		if (mon.h == NULL)
 		{
@@ -216,20 +216,28 @@ public:
 		while (m)
 		{
 			this->copy(th, m);
-			if (m->next == NULL)
+			if (th->next == NULL&&m->next!=NULL)
 			{
+				th->next = new Monom;
+				th->next->next = NULL;
+			}
+			if (m->next == NULL&&th->next!=NULL)
+			{
+				Monom *t = th->next;
+				while (t)
+				{
+					Monom *tt = t;
+					t = t->next;
+					delete tt;
+				}
 				th->next = NULL;
 				return *this;
 			}
-			if (th->next == NULL)
-			{
-				th->next = new Monom;
-			}
+			if (th->next == NULL&&m->next == NULL) return *this;
 			m = m->next;
 			th = th->next;
 			th->k = 0;
 			th->verstka = 0;
-			th->next = NULL;
 		}
 		return *this;
 	}
@@ -241,7 +249,6 @@ public:
 		{
 			t->k = 0;
 			t->verstka = 0;
-			if (t->next == NULL) return;
 			t = t->next;
 		}
 	}

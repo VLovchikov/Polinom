@@ -22,8 +22,6 @@ TEST(Polinom, can_create_polinom_with_first_neg_koef)
 	ASSERT_NO_THROW(Polinom p(t));
 }
 
-
-
 TEST(Polinom, can_calculate_polinom)
 {
 	const int m = 40;
@@ -33,3 +31,61 @@ TEST(Polinom, can_calculate_polinom)
 	double c=a.Calculate(2, 1, 3);
 	EXPECT_EQ(c, 18);
 }
+
+TEST(Polinom, can_plus_Polinom)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x1y2z1+2x2y3z1";
+	Polinom a(t);
+	t = "9x1y2z3+22x5y3z1";
+	Polinom aa(t);
+	ASSERT_NO_THROW(a + aa);
+}
+
+TEST(Polinom, can_subtract_Polinom)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x1y2z1+2x2y3z1";
+	Polinom a(t);
+	t = "9x1y2z3+22x5y3z1";
+	Polinom aa(t);
+	ASSERT_NO_THROW(a - aa);
+}
+
+TEST(Polinom, can_myltiply_Polinom)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x1y2z1+2x2y3z1";
+	Polinom a(t);
+	t = "9x1y2z3+22x5y3z1";
+	Polinom aa(t);
+	ASSERT_NO_THROW(a * aa);
+}
+
+TEST(Polinom, can_eq_Polinom)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x1y2z1+2x2y3z1";
+	Polinom a(t);
+	t = "9x1y2z3+22x5y3z1";
+	Polinom aa(t);
+	ASSERT_NO_THROW(a = aa);
+}
+
+TEST(Polinom, can_eq_Polinom_correctly)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x1y2z1+2x2y3z1";
+	Polinom a(t);
+	t = "9x1y2z3+22x5y3z1";
+	Polinom aa(t);
+	ASSERT_NO_THROW(a = aa);
+	a.print();
+	aa.print();
+}
+
