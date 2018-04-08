@@ -1,4 +1,5 @@
 #include "MonomList.h"
+#include "MonomList.cpp"
 #include "gtest/gtest.h"
 
 
@@ -75,13 +76,21 @@ TEST(MonomList, can_eq_Monom_is_empty)
 	ASSERT_NO_THROW(b = a);
 }
 
-
 TEST(MonomList, can_eq_Monom_if_is_empty_Monom)
 {
 	MonomList a;
 	a.add("-1009x1y2z3");
 	MonomList b;
 	ASSERT_NO_THROW(a = b);
+}
+
+TEST(MonomList, can_eq_Monom_if_is_empty_Monom_correctly)
+{
+	MonomList a;
+	a.add("-1009x1y2z3");
+	MonomList b;
+	ASSERT_NO_THROW(a = b);
+	a.print();
 }
 
 TEST(MonomList, can_sort)
