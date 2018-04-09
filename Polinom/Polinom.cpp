@@ -44,6 +44,8 @@ Polinom::Polinom(char * r)
 		a.add(buff);
 		delete buff;
 	}
+	a.sort();
+	a.check();
 }
 
 Polinom::Polinom(string str)
@@ -70,6 +72,8 @@ Polinom::Polinom(string str)
 		a.add(buff);
 		delete buff;
 	}
+	a.sort();
+	a.check();
 }
 
 Polinom::Polinom(Monom * mon)
@@ -105,85 +109,192 @@ Polinom Polinom::operator=(Polinom & b)
 
 Polinom Polinom::operator+(Polinom & b)
 {
+	if (this->a.head() == NULL) return b;
+	if (b.a.head() == NULL) return *this;
 	Monom *th = this->a.head();
 	Monom *mon = b.a.head();
-	while (th)
+	while (th&&mon)
 	{
-		int count = 0;
-		while (mon)
+		if (mon->verstka == th->verstka)
 		{
-			if (th->verstka == mon->verstka)
+			th->k += mon->k;
+		}
+		if (mon->verstka < th->verstka&&th==this->a.head())
+		{
+			Monom *t = new Monom;
+			t->k = mon->k;
+			t->verstka = mon->verstka;
+			t->next = th;
+			a.h = t;
+			th = this->a.head();
+		}
+		if (mon->verstka < th->verstka&&th != this->a.head())
+		{
+			Monom *t = this->a.head();
+			while (t->next != th)
 			{
-				th->k += mon->k; 
+				t = t->next;
+			}
+			Monom *m = new Monom;
+			m->k = mon->k;
+			m->verstka = mon->verstka;
+			t->next = m;
+			m->next = th;
+		}
+		if (mon->verstka > th->verstka)
+		{
+			while (th->next != NULL&&th->next->verstka < mon->verstka)
+			{
+				th = th->next;
+			}
+			if (th->next == NULL&&mon != NULL)
+			{
+				while (mon)
+				{
+					Monom *t = new Monom;
+					t->k = mon->k;
+					t->verstka = mon->verstka;
+					th->next = t;
+					th = th->next;
+					th->next = NULL;
+					mon = mon->next;
+				}
+				this->a.check();
+				return *this;
+			}
+			if (th->next == NULL) return *this;
+			if (th->next->verstka == mon->verstka)
+			{
+				th->next->k += mon->k;
 			}
 			else
 			{
-				Monom *tt = new Monom;
-				tt->k = mon->k;
-				tt->verstka = mon->verstka;
-				tt->next = th->next;
-				th->next = tt;
-				count++;
+				Monom *m = new Monom;
+				m->k = mon->k;
+				m->verstka = mon->verstka;
+				m->next = th->next;
+				th->next = m;
 			}
-			mon = mon->next;
 		}
-		if (th->next == NULL)
+		if (th->next==NULL&&mon!=NULL)
 		{
+			while (mon)
+			{
+				Monom *t = new Monom;
+				t->k = mon->k;
+				t->verstka = mon->verstka;
+				th->next = t;
+				th = th->next;
+				th->next = NULL;
+				mon = mon->next;
+			}
 			this->a.check();
-			this->a.sort();
 			return *this;
 		}
-		count++;
-		int i = 0;
-		while (i != count&&th!=NULL)
-		{
-			th = th->next; i++;
-		}
+		th = th->next;
+		mon = mon->next;
 	}
 	this->a.check();
-	this->a.sort();
 	return *this;
 }
 
-Polinom Polinom::operator-(Polinom & pol)
+Polinom Polinom::operator-(Polinom & b)
 {
-	Monom *th = this->a.head();
-	Monom *mon = pol.a.head();
-	while (th)
+	if (this->a.head() == NULL)
 	{
-		int count = 0;
-		while (mon)
+		Monom *bb = b.a.head();
+		while (bb)
 		{
-			if (th->verstka == mon->verstka)
+			bb->k *= -1;
+			bb = bb->next;
+			return *this = b;
+		}
+	}
+	if (b.a.head() == NULL) return *this;
+	Monom *th = this->a.head();
+	Monom *mon = b.a.head();
+	while (th&&mon)
+	{
+		if (mon->verstka == th->verstka)
+		{
+			th->k -= mon->k;
+		}
+		if (mon->verstka < th->verstka&&th == this->a.head())
+		{
+			Monom *t = new Monom;
+			t->k = mon->k;
+			t->verstka = mon->verstka;
+			t->next = th;
+			a.h = t;
+			th = this->a.head();
+		}
+		if (mon->verstka < th->verstka&&th != this->a.head())
+		{
+			Monom *t = this->a.head();
+			while (t->next != th)
 			{
-				th->k -= mon->k;
+				t = t->next;
+			}
+			Monom *m = new Monom;
+			m->k = mon->k;
+			m->verstka = mon->verstka;
+			t->next = m;
+			m->next = th;
+		}
+		if (mon->verstka > th->verstka)
+		{
+			while (th->next != NULL&&th->next->verstka < mon->verstka)
+			{
+				th = th->next;
+			}
+			if (th->next == NULL&&mon != NULL)
+			{
+				while (mon)
+				{
+					Monom *t = new Monom;
+					t->k = mon->k;
+					t->verstka = mon->verstka;
+					th->next = t;
+					th = th->next;
+					th->next = NULL;
+					mon = mon->next;
+				}
+				this->a.check();
+				return *this;
+			}
+			if (th->next == NULL) return *this;
+			if (th->next->verstka == mon->verstka)
+			{
+				th->next->k -= mon->k;
 			}
 			else
 			{
-				Monom *tt = new Monom;
-				tt->k = mon->k;
-				tt->verstka = mon->verstka;
-				tt->next = th->next;
-				th->next = tt;
-				count++;
+				Monom *m = new Monom;
+				m->k = mon->k;
+				m->verstka = mon->verstka;
+				m->next = th->next;
+				th->next = m;
 			}
-			mon = mon->next;
 		}
-		if (th->next == NULL)
+		if (th->next == NULL&&mon != NULL)
 		{
+			while (mon)
+			{
+				Monom *t = new Monom;
+				t->k = mon->k;
+				t->verstka = mon->verstka;
+				th->next = t;
+				th = th->next;
+				th->next = NULL;
+				mon = mon->next;
+			}
 			this->a.check();
-			this->a.sort();
 			return *this;
 		}
-		count++;
-		int i = 0;
-		while (i != count)
-		{
-			th = th->next; i++;
-		}
+		th = th->next;
+		mon = mon->next;
 	}
 	this->a.check();
-	this->a.sort();
 	return *this;
 }
 

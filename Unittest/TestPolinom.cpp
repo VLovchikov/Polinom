@@ -16,6 +16,33 @@ TEST(Polinom, can_create_polinom)
 	ASSERT_NO_THROW(Polinom p(t));
 }
 
+TEST(Polinom, can_create_polinom_with_k_0_monom_in_the_end)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "1x1y1z1+0x8y7z9";
+	Polinom p(t);
+	ASSERT_NO_THROW(p.print());
+}
+
+TEST(Polinom, can_create_polinom_with_k_0_monom_in_the_middle)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "1x1y1z1+0x8y7z9-12x1y2z3";
+	Polinom p(t);
+	ASSERT_NO_THROW(p.print());
+}
+
+TEST(Polinom, can_create_polinom_with_k_0_monom_in_the_start)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "0x1y1z1+98x8y7z9-12x1y2z3";
+	Polinom p(t);
+	ASSERT_NO_THROW(p.print());
+}
+
 TEST(Polinom, can_work_copy_construct)
 {
 	const int m = 40;
@@ -35,7 +62,6 @@ TEST(Polinom, can_work_copy_construct_correctly)
 	cout << endl;
 	Polinom pp(p);
 	ASSERT_NO_THROW(pp.print());
-	
 }
 
 TEST(Polinom, can_create_polinom_with_first_neg_koef)
@@ -138,6 +164,17 @@ TEST(Polinom, can_myltiply_Polinom)
 	ASSERT_NO_THROW(a * aa);
 }
 
+TEST(Polinom, can_myltiply_Polinom_on_zero)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x1y2z1+2x2y3z1";
+	Polinom a(t);
+	Polinom aa;
+	ASSERT_NO_THROW(a * aa);
+	a.print();
+}
+
 TEST(Polinom, can_myltiply_Polinom_correctly)
 {
 	const int m = 40;
@@ -166,6 +203,28 @@ TEST(Polinom, can_eq_Polinom)
 	ASSERT_NO_THROW(a = aa);
 }
 
+TEST(Polinom, can_eq_NULL_Polinom)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x1y2z1+2x2y3z1";
+	Polinom a(t);
+	Polinom aa;
+	ASSERT_NO_THROW(a = aa);
+	a.print();
+}
+
+TEST(Polinom, can_eq_Polinom_if_this_Polinom_is_zero)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x1y2z1+2x2y3z1";
+	Polinom a(t);
+	Polinom aa;
+	ASSERT_NO_THROW(aa = a);
+	aa.print();
+}
+
 TEST(Polinom, can_eq_Polinom_correctly)
 {
 	const int m = 40;
@@ -179,7 +238,6 @@ TEST(Polinom, can_eq_Polinom_correctly)
 	cout << endl;
 	aa.print();
 }
-
 
 TEST(Polinom, can_reverse_convert_to_string)
 {

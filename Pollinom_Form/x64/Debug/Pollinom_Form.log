@@ -1,11 +1,15 @@
 ﻿  MyForm.cpp
-a:\проекты\polinom\polinom\pollinom_form\MyForm.h(291): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
-a:\проекты\polinom\polinom\pollinom_form\MyForm.h(297): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
-a:\проекты\polinom\polinom\pollinom_form\MyForm.h(315): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
-a:\проекты\polinom\polinom\pollinom_form\MyForm.h(321): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
-a:\проекты\polinom\polinom\pollinom_form\MyForm.h(339): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
-a:\проекты\polinom\polinom\pollinom_form\MyForm.h(345): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
-MyForm.cpp(9): error C2976: std::array: слишком мало аргументов шаблон
-  A:\Visual Studio\VC\include\utility(363): note:  см. объявление "std::array"
-MyForm.cpp(9): error C3699: ^: это косвенное обращение невозможно использовать для типа "std::array"
-  MyForm.cpp(9): note: для продолжения работы компилятор заменил "^" на "*"
+A:\Проекты\Polinom\Polinom\Polinom\Polinom.cpp(25): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+A:\Проекты\Polinom\Polinom\Polinom\Polinom.cpp(53): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+A:\Проекты\Polinom\Polinom\Polinom\MonomList.cpp(7): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+a:\проекты\polinom\polinom\pollinom_form\MyForm.h(312): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
+a:\проекты\polinom\polinom\pollinom_form\MyForm.h(318): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
+a:\проекты\polinom\polinom\pollinom_form\MyForm.h(336): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
+a:\проекты\polinom\polinom\pollinom_form\MyForm.h(342): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
+a:\проекты\polinom\polinom\pollinom_form\MyForm.h(360): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
+a:\проекты\polinom\polinom\pollinom_form\MyForm.h(366): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
+a:\проекты\polinom\polinom\pollinom_form\MyForm.h(389): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
+LINK : warning LNK4075: не учитывается "/INCREMENTAL" из-за спецификации "/LTCG"
+  LINK : указан параметр /LTCG, но не требуется создание кода; удалите /LTCG из командной строки компоновки для повышения производительности компоновщика
+  Pollinom_Form.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Polinom_Form.exe
+  Pollinom_Form.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Polinom_Form.pdb (Partial PDB)

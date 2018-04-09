@@ -111,3 +111,23 @@ TEST(MonomList, true_sort)
 	a.sort();
 	ASSERT_NO_THROW(a.print());
 }
+
+TEST(MonomList, check_on_k_0_is_work)
+{
+	MonomList a;
+	a.add("-100x1y2z3");
+	a.add("0x1y2z2");
+	a.add("19x1y2z1");
+	ASSERT_NO_THROW(a.check());
+}
+
+TEST(MonomList, check_on_k_0_is_work_correctly)
+{
+	MonomList a;
+	a.add("-100x1y2z3");
+	a.add("0x1y2z2");
+	a.add("19x1y2z1");
+	a.print();
+	ASSERT_NO_THROW(a.check());
+	a.print();
+}

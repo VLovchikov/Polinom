@@ -141,6 +141,21 @@ void MonomList::check()
 		h = h->next;
 		delete t;
 	}
+	if (h->next!=NULL&&h->next->k == 0)
+	{
+		if (h->next->next != NULL)
+		{
+			Monom *t = h->next;
+			h->next = h->next->next;
+			delete t;
+		}
+		else
+		{
+			Monom *t = h->next;
+			h->next = NULL;
+			delete t;
+		}
+	}
 	if (h->next != NULL&&h->next->next != NULL)
 	{
 		Monom *ex = h;

@@ -1,14 +1,18 @@
 #pragma once
 #include "Polinom.h"
-
-
+#include "Polinom.cpp"
+#include "MonomList.h"
+#include "MonomList.cpp"
 std::string strnull="";
 std::string str1;
 std::string str2;
 std::string outstr1;
+std::string strtotal;
+int x;
+int y;
+int z;
 
 namespace Pollinom_Form {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -100,6 +104,7 @@ namespace Pollinom_Form {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(281, 20);
 			this->textBox1->TabIndex = 0;
+			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			// 
 			// textBox2
 			// 
@@ -107,6 +112,7 @@ namespace Pollinom_Form {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(281, 20);
 			this->textBox2->TabIndex = 1;
+			this->textBox2->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox2_TextChanged);
 			// 
 			// label1
 			// 
@@ -171,9 +177,9 @@ namespace Pollinom_Form {
 			this->label4->AutoSize = true;
 			this->label4->Location = System::Drawing::Point(16, 252);
 			this->label4->MaximumSize = System::Drawing::Size(300, 13);
-			this->label4->MinimumSize = System::Drawing::Size(300, 13);
+			this->label4->MinimumSize = System::Drawing::Size(450, 13);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(300, 13);
+			this->label4->Size = System::Drawing::Size(450, 13);
 			this->label4->TabIndex = 8;
 			// 
 			// label5
@@ -209,6 +215,7 @@ namespace Pollinom_Form {
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(23, 20);
 			this->textBox3->TabIndex = 12;
+			this->textBox3->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox3_TextChanged);
 			// 
 			// textBox4
 			// 
@@ -216,6 +223,7 @@ namespace Pollinom_Form {
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(23, 20);
 			this->textBox4->TabIndex = 13;
+			this->textBox4->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox4_TextChanged);
 			// 
 			// textBox5
 			// 
@@ -223,6 +231,7 @@ namespace Pollinom_Form {
 			this->textBox5->Name = L"textBox5";
 			this->textBox5->Size = System::Drawing::Size(23, 20);
 			this->textBox5->TabIndex = 14;
+			this->textBox5->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox5_TextChanged);
 			// 
 			// label8
 			// 
@@ -250,6 +259,7 @@ namespace Pollinom_Form {
 			this->button4->TabIndex = 17;
 			this->button4->Text = L"Calculate";
 			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
 			// 
 			// MyForm
 			// 
@@ -276,11 +286,22 @@ namespace Pollinom_Form {
 			this->Controls->Add(this->textBox1);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
+			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+	private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+	}
+    private: System::Void textBox2_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+	}
+	private: System::Void textBox3_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+	}
+	private: System::Void textBox4_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+	}
+	private: System::Void textBox5_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		label4->Text = gcnew String(strnull.c_str());
@@ -290,11 +311,11 @@ namespace Pollinom_Form {
 		{
 			str1[i] = textBox1->Text[i];
 		}
-		int len2 = textBox1->Text->Length;
+		int len2 = textBox2->Text->Length;
 		str2.resize(len2);
 		for (int i = 0; i < len2; i++)
 		{
-			str2[i] = textBox1->Text[i];
+			str2[i] = textBox2->Text[i];
 		}
 		Polinom A(str1);
 		Polinom B(str2);
@@ -314,20 +335,20 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	{
 		str1[i] = textBox1->Text[i];
 	}
-	int len2 = textBox1->Text->Length;
+	int len2 = textBox2->Text->Length;
 	str2.resize(len2);
 	for (int i = 0; i < len2; i++)
 	{
-		str2[i] = textBox1->Text[i];
+		str2[i] = textBox2->Text[i];
 	}
 	Polinom A(str1);
 	Polinom B(str2);
 	A - B;
-	str1 = "";
-	str2 = "";
 	outstr1 = A.ReverseConvert();
 	label4->Text = gcnew String(outstr1.c_str());
 	outstr1 = "";
+	str1 = "";
+	str2 = "";
 }
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e)
 {
@@ -338,20 +359,39 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 	{
 		str1[i] = textBox1->Text[i];
 	}
-	int len2 = textBox1->Text->Length;
+	int len2 = textBox2->Text->Length;
 	str2.resize(len2);
 	for (int i = 0; i < len2; i++)
 	{
-		str2[i] = textBox1->Text[i];
+		str2[i] = textBox2->Text[i];
 	}
 	Polinom A(str1);
 	Polinom B(str2);
 	A * B;
-	str1 = "";
-	str2 = "";
 	outstr1 = A.ReverseConvert();
 	label4->Text = gcnew String(outstr1.c_str());
 	outstr1 = "";
+	str1 = "";
+	str2 = "";
+}
+private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	
+	x = Convert::ToInt32(textBox3->Text);
+	y = Convert::ToInt32(textBox4->Text);
+	z = Convert::ToInt32(textBox5->Text);
+	int len3 = label4->Text->Length;
+	strtotal.resize(len3);
+	for (int i = 0; i < len3; i++)
+	{
+		strtotal[i] = label4->Text[i];
+	}
+	Polinom A(strtotal);
+	double tot;
+	tot=A.Calculate(x, y, z);
+	label9->Text = gcnew String(Convert::ToString(tot));
 }
 };
 }

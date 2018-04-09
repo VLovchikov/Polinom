@@ -8,11 +8,14 @@ const int m = 40;
 char *t = new char[m];
 int main()
 {
-	t = "1x1y1z1-10x6y5z7+4x6y4z8";
-	Polinom p;
-	string t = "9x1y1z1-1x3y2z7+4x4y1z2";
-	Polinom pp(p);
+	t = "10x1y1z1+8x6y7z9-12x7y6z4";
+	Polinom p(t);
+	string t = "10x1y1z1+89x6y7z9+10x2y5z10";
+	Polinom pp(t);
+	p.print();
 	pp.print();
+	p - pp;
+	p.print();
 	system("pause");
 	return 0;
 }
