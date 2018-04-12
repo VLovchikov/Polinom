@@ -3,27 +3,17 @@
 Polinom::Polinom()
 {
 	MonomList();
-	length = 0;
-	polinom = NULL;
 }
 
 Polinom::Polinom(Polinom & pol)
 {
-	if (this->a.head() != NULL) delete[] this->polinom;
 	this->a = pol.a;
-	this->length = pol.length;
-	this->polinom = new char[this->length];
-	int i = 0;
-	while (i != this->length)
-	{
-		this->polinom[i] = pol.polinom[i]; i++;
-	}
 }
 
 Polinom::Polinom(char * r)
 {
-	length = strlen(r);
-	polinom = new char[length];
+	int length = strlen(r);
+	char *polinom = new char[length];
 	for (int i = 0; i < length; i++)
 	{
 		polinom[i] = r[i];
@@ -44,14 +34,15 @@ Polinom::Polinom(char * r)
 		a.add(buff);
 		delete buff;
 	}
+	delete[] polinom;
 	a.sort();
 	a.check();
 }
 
 Polinom::Polinom(string str)
 {
-	length = str.length();
-	polinom = new char[length];
+	int length = str.length();
+	char *polinom = new char[length];
 	for (int i = 0; i < length; i++)
 	{
 		polinom[i] = str[i];
@@ -95,15 +86,6 @@ Polinom Polinom::operator=(Polinom & b)
 {
 	if (this->a.h == b.a.h) return *this;
 	this->a = b.a;
-	delete[] this->polinom;
-	this->length = b.length;
-	this->polinom = new char[b.length];
-	int pos = 0;
-	while (pos != b.length)
-	{
-		this->polinom[pos] = b.polinom[pos];
-		pos++;
-	}
 	return *this;
 }
 
@@ -176,7 +158,7 @@ Polinom Polinom::operator+(Polinom & b)
 				th->next = m;
 			}
 		}
-		if (th->next==NULL&&mon!=NULL)
+		if (th==NULL&&mon!=NULL)
 		{
 			while (mon)
 			{
@@ -222,7 +204,7 @@ Polinom Polinom::operator-(Polinom & b)
 		if (mon->verstka < th->verstka&&th == this->a.head())
 		{
 			Monom *t = new Monom;
-			t->k = mon->k;
+			t->k =-1* mon->k;
 			t->verstka = mon->verstka;
 			t->next = th;
 			a.h = t;
@@ -236,7 +218,7 @@ Polinom Polinom::operator-(Polinom & b)
 				t = t->next;
 			}
 			Monom *m = new Monom;
-			m->k = mon->k;
+			m->k =-1* mon->k;
 			m->verstka = mon->verstka;
 			t->next = m;
 			m->next = th;
@@ -252,7 +234,7 @@ Polinom Polinom::operator-(Polinom & b)
 				while (mon)
 				{
 					Monom *t = new Monom;
-					t->k = mon->k;
+					t->k = -1*mon->k;
 					t->verstka = mon->verstka;
 					th->next = t;
 					th = th->next;
@@ -270,18 +252,18 @@ Polinom Polinom::operator-(Polinom & b)
 			else
 			{
 				Monom *m = new Monom;
-				m->k = mon->k;
+				m->k =-1* mon->k;
 				m->verstka = mon->verstka;
 				m->next = th->next;
 				th->next = m;
 			}
 		}
-		if (th->next == NULL&&mon != NULL)
+		if (th == NULL&&mon != NULL)
 		{
 			while (mon)
 			{
 				Monom *t = new Monom;
-				t->k = mon->k;
+				t->k = -1*mon->k;
 				t->verstka = mon->verstka;
 				th->next = t;
 				th = th->next;
@@ -341,13 +323,13 @@ Polinom Polinom::operator*(Polinom & pol)
 	return *this;
 }
 
-double Polinom::Calculate(int xx, int yy, int zz)
+double Polinom::Calculate(double xx, double yy, double zz)
 {
 	double  total = 0;
 	Monom *t = this->a.head();
-	int x = xx;
-	int y = yy;
-	int z = zz;
+	double x = xx;
+	double y = yy;
+	double z = zz;
 	while (t)
 	{
 		int grz = 0;
@@ -356,6 +338,10 @@ double Polinom::Calculate(int xx, int yy, int zz)
 		grz = t->verstka / 400;
 		gry = (t->verstka - 400 * grz) / 20;
 		grx = t->verstka - (400 * grz + 20 * gry);
+		if ((x == 0 && grx == 0) || (y == 0 && gry == 0 )||( grz == 0 && z == 0))
+		{
+			throw -1;
+		}
 		total += pow(x, grx) * pow(y, gry) * pow(z, grz)*t->k;
 		t = t->next;
 	}

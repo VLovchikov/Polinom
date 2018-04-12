@@ -111,6 +111,7 @@ void MonomList::add(char * t)
 
 void MonomList::sort()
 {
+	if (h == NULL) return;
 	Monom *t = h;
 	while (t)
 	{
@@ -135,6 +136,7 @@ void MonomList::sort()
 
 void MonomList::check()
 {
+	if (h == NULL) return;
 	if (h->k == 0 && h->next != NULL)
 	{
 		Monom *t = h;

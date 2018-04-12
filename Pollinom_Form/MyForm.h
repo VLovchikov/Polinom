@@ -8,9 +8,7 @@ std::string str1;
 std::string str2;
 std::string outstr1;
 std::string strtotal;
-int x;
-int y;
-int z;
+
 
 namespace Pollinom_Form {
 	using namespace System;
@@ -213,7 +211,7 @@ namespace Pollinom_Form {
 			// 
 			this->textBox3->Location = System::Drawing::Point(381, 39);
 			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(23, 20);
+			this->textBox3->Size = System::Drawing::Size(39, 20);
 			this->textBox3->TabIndex = 12;
 			this->textBox3->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox3_TextChanged);
 			// 
@@ -221,7 +219,7 @@ namespace Pollinom_Form {
 			// 
 			this->textBox4->Location = System::Drawing::Point(381, 73);
 			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(23, 20);
+			this->textBox4->Size = System::Drawing::Size(39, 20);
 			this->textBox4->TabIndex = 13;
 			this->textBox4->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox4_TextChanged);
 			// 
@@ -229,7 +227,7 @@ namespace Pollinom_Form {
 			// 
 			this->textBox5->Location = System::Drawing::Point(381, 104);
 			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(23, 20);
+			this->textBox5->Size = System::Drawing::Size(39, 20);
 			this->textBox5->TabIndex = 14;
 			this->textBox5->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox5_TextChanged);
 			// 
@@ -265,7 +263,7 @@ namespace Pollinom_Form {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(588, 358);
+			this->ClientSize = System::Drawing::Size(496, 295);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->label9);
 			this->Controls->Add(this->label8);
@@ -378,10 +376,12 @@ private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e
 }
 private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	
-	x = Convert::ToInt32(textBox3->Text);
-	y = Convert::ToInt32(textBox4->Text);
-	z = Convert::ToInt32(textBox5->Text);
+	double x;
+	double y;
+	double z;
+	x = Convert::ToDouble(textBox3->Text);
+	y = Convert::ToDouble(textBox4->Text);
+	z = Convert::ToDouble(textBox5->Text);
 	int len3 = label4->Text->Length;
 	strtotal.resize(len3);
 	for (int i = 0; i < len3; i++)
@@ -390,7 +390,17 @@ private: System::Void button4_Click(System::Object^  sender, System::EventArgs^ 
 	}
 	Polinom A(strtotal);
 	double tot;
-	tot=A.Calculate(x, y, z);
+	
+	try
+	{
+		tot = A.Calculate(x, y, z);
+	}
+	catch (...)
+	{
+		string ss = "Error Calculating";
+		label9->Text = gcnew String(ss.c_str());
+		return;
+	}
 	label9->Text = gcnew String(Convert::ToString(tot));
 }
 };

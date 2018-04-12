@@ -97,6 +97,22 @@ TEST(Polinom, can_calculate_polinom_correctly)
 	cout <<"Answer: "<< c << endl;
 }
 
+TEST(Polinom, can_calculate_polinom_correctly_with_NULL_grade)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x0y2z0+2x0y0z1";
+	Polinom a(t);
+	a.print();
+	int x = 2;
+	int y = 1;
+	int z = 3;
+	double c = a.Calculate(x, y, z);
+	EXPECT_EQ(c, 5);
+	cout << "x=" << x << "   y=" << y << "   z=" << z << endl;
+	cout << "Answer: " << c << endl;
+}
+
 TEST(Polinom, can_plus_Polinom)
 {
 	const int m = 40;
@@ -125,6 +141,17 @@ TEST(Polinom, can_plus_Polinom_correctly)
 	aa.print();
 }
 
+TEST(Polinom, can_plus_Polinom_with_NULL_grade)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x0y2z0+2x2y0z1";
+	Polinom a(t);
+	t = "9x0y2z3+22x0y3z0";
+	Polinom aa(t);
+	ASSERT_NO_THROW(a + aa);
+}
+
 TEST(Polinom, can_subtract_Polinom)
 {
 	const int m = 40;
@@ -132,6 +159,17 @@ TEST(Polinom, can_subtract_Polinom)
 	t = "-1x1y2z1+2x2y3z1";
 	Polinom a(t);
 	t = "9x1y2z3+22x5y3z1";
+	Polinom aa(t);
+	ASSERT_NO_THROW(a - aa);
+}
+
+TEST(Polinom, can_substract_Polinom_with_NULL_grade)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x0y2z0+2x2y0z1";
+	Polinom a(t);
+	t = "9x0y2z3+22x0y3z0";
 	Polinom aa(t);
 	ASSERT_NO_THROW(a - aa);
 }
@@ -171,6 +209,23 @@ TEST(Polinom, can_myltiply_Polinom_on_zero)
 	t = "-1x1y2z1+2x2y3z1";
 	Polinom a(t);
 	Polinom aa;
+	ASSERT_NO_THROW(a * aa);
+	a.print();
+}
+
+TEST(Polinom, can_myltiply_Polinom_with_NULL_grade)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x1y0z0+2x2y0z1";
+	Polinom a(t);
+	a.print();
+	cout << endl;
+	t = "9x0y0z8+22x0y0z1";
+	Polinom aa(t);
+	aa.print();
+	cout << endl;
+	cout << endl;
 	ASSERT_NO_THROW(a * aa);
 	a.print();
 }

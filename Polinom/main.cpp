@@ -8,14 +8,15 @@ const int m = 40;
 char *t = new char[m];
 int main()
 {
-	t = "10x1y1z1+8x6y7z9-12x7y6z4";
+	string t = "10x0y1z1-12x0y1z2+2x0y0z0";
 	Polinom p(t);
-	string t = "10x1y1z1+89x6y7z9+10x2y5z10";
+	t = "10x0y0z1+5x2y0z1";
 	Polinom pp(t);
+	p * pp;
+	string ss = p.ReverseConvert();
+	cout << ss << endl;
 	p.print();
-	pp.print();
-	p - pp;
-	p.print();
+	cout<<p.Calculate(2.09, 0, 9.81);
 	system("pause");
 	return 0;
 }

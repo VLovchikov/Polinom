@@ -1,5 +1,5 @@
 ﻿  TestPolinom.cpp
-a:\проекты\polinom\polinom\polinom\polinom.cpp(25): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-a:\проекты\polinom\polinom\polinom\polinom.cpp(53): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+a:\проекты\polinom\polinom\polinom\polinom.cpp(15): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+a:\проекты\polinom\polinom\polinom\polinom.cpp(44): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
   Unittest.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Unittest.exe
   Unittest.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Unittest.pdb (Full PDB)

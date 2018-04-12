@@ -9,8 +9,7 @@ using namespace std;
 class Polinom
 {
 	MonomList a;
-	char *polinom;
-	int length;
+	
 public:
 	Polinom();
 	Polinom(Polinom &pol);
@@ -23,7 +22,7 @@ public:
 	Polinom operator+ (Polinom &b);
 	Polinom operator -(Polinom &pol);
 	Polinom operator *(Polinom &pol);
-	double Calculate(int xx, int yy, int zz);
+	double Calculate(double xx, double yy, double zz);
 	string ReverseConvert();
 };
 

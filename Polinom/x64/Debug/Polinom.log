@@ -1,4 +1,3 @@
-﻿  MonomList.cpp
-a:\проекты\polinom\polinom\polinom\monomlist.cpp(7): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+﻿  main.cpp
   Polinom.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Polinom.exe
   Polinom.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Polinom.pdb (Partial PDB)
