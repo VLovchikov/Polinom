@@ -230,6 +230,17 @@ TEST(Polinom, can_myltiply_Polinom_with_NULL_grade)
 	a.print();
 }
 
+TEST(Polinom, cant_calculate_Polinom_with_NULL_grade_and_var_is_NULL)
+{
+	const int m = 40;
+	char *t = new char[m];
+	t = "-1x1y0z0+2x2y0z1";
+	Polinom a(t);
+	a.print();
+	cout << endl;
+	ASSERT_ANY_THROW(a.Calculate(1,0,1));
+}
+
 TEST(Polinom, can_myltiply_Polinom_correctly)
 {
 	const int m = 40;
