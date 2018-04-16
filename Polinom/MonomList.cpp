@@ -160,27 +160,26 @@ void MonomList::check()
 	}
 	if (h->next != NULL&&h->next->next != NULL)
 	{
-		Monom *ex = h;
-		Monom *n = ex->next;
-		while (n->next != NULL)
+		Monom *tt = h;
+		while (tt->next != NULL)
 		{
-			if (n->k == 0)
+			if (tt->next->k == 0)
 			{
-				Monom *r = n;
-				n = n->next;
-				ex->next = n;
+				Monom *r = tt->next;
+				if (tt->next->next == NULL)
+				{
+					tt->next = NULL;
+				}
+				else
+				{
+					tt->next = tt->next->next;
+				}
 				delete r;
 			}
 			else
 			{
-				n = n->next;
-				ex = ex->next;
+				tt = tt->next;
 			}
-		}
-		if (n->next == NULL&&n->k == 0)
-		{
-			delete n;
-			ex->next = NULL;
 		}
 	}
 }

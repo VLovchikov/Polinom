@@ -129,5 +129,6 @@ TEST(MonomList, check_on_k_0_is_work_correctly)
 	a.add("19x1y2z1");
 	a.print();
 	ASSERT_NO_THROW(a.check());
+	cout << endl << endl;
 	a.print();
 }

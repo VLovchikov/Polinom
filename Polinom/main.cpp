@@ -15,8 +15,8 @@ int main()
 	p * pp;
 	string ss = p.ReverseConvert();
 	cout << ss << endl;
-	p.print();
-	cout<<p.Calculate(2.09, 0, 9.81);
+	int tt = 0;
+	cout << p.Calculate(2.09, 0, 9.81);
 	system("pause");
 	return 0;
 }
