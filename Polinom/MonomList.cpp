@@ -137,56 +137,23 @@ void MonomList::sort()
 void MonomList::check()
 {
 	if (h == NULL) return;
-	if (h->k == 0 && h->next != NULL)
+	if (h->k == 0)
 	{
 		Monom *t = h;
+		if (h->next == NULL) return;
 		h = h->next;
 		delete t;
 	}
-	if (h->next!=NULL&&h->next->k == 0)
+	Monom *t = h;
+	while (t->next!=NULL)
 	{
-		if (h->next->next != NULL)
+		if (t->next->k == 0)
 		{
-			Monom *t = h->next;
-			h->next = h->next->next;
-			if (h->next -> k == 0)
-			{
-				Monom *g = h->next;
-				h->next = NULL;
-				delete g;
-			}
-			delete t;
+			Monom *tt = t;
+			while (t!=NULL&&t->k == 0) t = t->next;
+			tt->next = t;
 		}
-		else
-		{
-			Monom *t = h->next;
-			h->next = NULL;
-			delete t;
-		}
-	}
-	if (h->next != NULL&&h->next->next != NULL)
-	{
-		Monom *tt = h;
-		while (tt->next != NULL)
-		{
-			if (tt->next->k == 0)
-			{
-				Monom *r = tt->next;
-				if (tt->next->next == NULL)
-				{
-					tt->next = NULL;
-				}
-				else
-				{
-					tt->next = tt->next->next;
-				}
-				delete r;
-			}
-			else
-			{
-				tt = tt->next;
-			}
-		}
+		t = t->next;
 	}
 }
 

@@ -388,9 +388,14 @@ private: System::Void button4_Click(System::Object^  sender, System::EventArgs^ 
 	{
 		strtotal[i] = label4->Text[i];
 	}
-	Polinom A(strtotal);
 	double tot;
-	
+	if (strtotal == "0")
+	{
+		tot = 0;
+		label9->Text = gcnew String(Convert::ToString(tot));
+		return;
+	}
+	Polinom A(strtotal);
 	try
 	{
 		tot = A.Calculate(x, y, z);

@@ -136,12 +136,12 @@ Polinom Polinom::operator+(Polinom & b)
 					mon = mon->next;
 				}
 			}
-			this->a.check();
+			
 			return *this;
 		}
 		if (th->next != NULL&&mon == NULL)
 		{
-			this->a.check();
+			
 			return *this;
 		}
 		if (mon->verstka == th->verstka)
@@ -194,7 +194,7 @@ Polinom Polinom::operator+(Polinom & b)
 					th->next = NULL;
 					mon = mon->next;
 				}
-				this->a.check();
+				
 				return *this;
 			}
 			if (th->verstka == mon->verstka)
@@ -214,7 +214,7 @@ Polinom Polinom::operator+(Polinom & b)
 		th = th->next;
 		mon = mon->next;
 	}
-	this->a.check();
+	
 	return *this;
 }
 
@@ -242,12 +242,12 @@ Polinom Polinom::operator-(Polinom & b)
 				if (th->verstka == mon->verstka)
 				{
 					th->k -= mon->k;
-					mon = mon->next;
+					
 				}
 				else
 				{
 					Monom *t = new Monom;
-					t->k = mon->k;
+					t->k = -1*mon->k;
 					t->verstka = mon->verstka;
 					t->next = NULL;
 					if (th->verstka > mon->verstka)
@@ -271,15 +271,13 @@ Polinom Polinom::operator-(Polinom & b)
 						th = th->next;
 						th->next = NULL;
 					}
-					mon = mon->next;
 				}
+				mon = mon->next;
 			}
-			this->a.check();
 			return *this;
 		}
 		if (th->next != NULL&&mon == NULL)
 		{
-			this->a.check();
 			return *this;
 		}
 		if (mon->verstka == th->verstka)
@@ -290,7 +288,7 @@ Polinom Polinom::operator-(Polinom & b)
 		{
 			Monom *t = new Monom;
 			t->verstka = mon->verstka;
-			t->k = mon->k;
+			t->k = -1 * mon->k;
 			if (th == this->a.head())
 			{
 				t->next = th;
@@ -325,14 +323,14 @@ Polinom Polinom::operator-(Polinom & b)
 				{
 					Monom *t = new Monom;
 					t->verstka = mon->verstka;
-					t->k = mon->k;
+					t->k = -1 * mon->k;
 					t->next = NULL;
 					th->next = t;
 					th = th->next;
 					th->next = NULL;
 					mon = mon->next;
 				}
-				this->a.check();
+				
 				return *this;
 			}
 			if (th->verstka == mon->verstka)
@@ -343,7 +341,7 @@ Polinom Polinom::operator-(Polinom & b)
 			{
 				Monom *t = new Monom;
 				t->verstka = mon->verstka;
-				t->k = mon->k;
+				t->k = -1 * mon->k;
 				t->next = th->next;
 				th->next = t;
 				th = th->next;
@@ -352,7 +350,7 @@ Polinom Polinom::operator-(Polinom & b)
 		th = th->next;
 		mon = mon->next;
 	}
-	this->a.check();
+	
 	return *this;
 }
 
@@ -431,6 +429,11 @@ string Polinom::ReverseConvert()
 	while (t)
 	{
 		while (t->next!=NULL&&t->k == 0) t = t->next;
+		if (t->next == 0 && t->k == 0)
+		{
+			if (str == "") str = "0";
+			return str;
+		}
 		string k = "";
 		if (t->k > 0) k = k + "+";
 		k = k + to_string(t->k);
@@ -446,5 +449,6 @@ string Polinom::ReverseConvert()
 		str = str + k;
 		t = t->next;
 	}
+	if (str == "") str = "0";
 	return str;
 }
