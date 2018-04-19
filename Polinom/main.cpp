@@ -8,7 +8,7 @@ const int m = 40;
 char *t = new char[m];
 int main()
 {
-	string t = "10x0y1z1-12x0y1z2+2x0y0z0";
+	string t = "2x1y1z5+10x2y2z10-2x1y1z1";
 	Polinom p(t);
 	t = "10x0y0z1+5x2y0z1";
 	Polinom pp(t);

@@ -9,7 +9,6 @@ a:\проекты\polinom\polinom\pollinom_form\MyForm.h(340): warning C4244: =:
 a:\проекты\polinom\polinom\pollinom_form\MyForm.h(358): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
 a:\проекты\polinom\polinom\pollinom_form\MyForm.h(364): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
 a:\проекты\polinom\polinom\pollinom_form\MyForm.h(389): warning C4244: =: преобразование "wchar_t" в "char", возможна потеря данных
-  .NETFramework,Version=v4.5.2.AssemblyAttributes.cpp
 LINK : warning LNK4075: не учитывается "/INCREMENTAL" из-за спецификации "/LTCG"
   LINK : указан параметр /LTCG, но не требуется создание кода; удалите /LTCG из командной строки компоновки для повышения производительности компоновщика
   Pollinom_Form.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Polinom_Form.exe

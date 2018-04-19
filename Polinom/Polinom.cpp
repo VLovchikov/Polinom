@@ -95,47 +95,100 @@ Polinom Polinom::operator+(Polinom & b)
 	if (b.a.head() == NULL) return *this;
 	Monom *th = this->a.head();
 	Monom *mon = b.a.head();
-	while (th&&mon)
+	while (th != NULL && mon != NULL)
 	{
-		if (mon->verstka == th->verstka)
+		if (th->next == NULL&&mon!=NULL)
 		{
-			th->k += mon->k;
-		}
-		if (mon->verstka < th->verstka&&th==this->a.head())
-		{
-			Monom *t = new Monom;
-			t->k = mon->k;
-			t->verstka = mon->verstka;
-			t->next = th;
-			a.h = t;
-			th = this->a.head();
-		}
-		if (mon->verstka < th->verstka&&th != this->a.head())
-		{
-			Monom *t = this->a.head();
-			while (t->next != th)
+			while (mon)
 			{
-				t = t->next;
-			}
-			Monom *m = new Monom;
-			m->k = mon->k;
-			m->verstka = mon->verstka;
-			t->next = m;
-			m->next = th;
-		}
-		if (mon->verstka > th->verstka)
-		{
-			while (th->next != NULL&&th->next->verstka < mon->verstka)
-			{
-				th = th->next;
-			}
-			if (th->next == NULL&&mon != NULL)
-			{
-				while (mon)
+				if (th->verstka == mon->verstka)
+				{
+					th->k += mon->k;
+					mon = mon->next;
+				}
+				else
 				{
 					Monom *t = new Monom;
 					t->k = mon->k;
 					t->verstka = mon->verstka;
+					t->next = NULL;
+					if (th->verstka > mon->verstka)
+					{
+						if (th == this->a.head())
+						{
+							t->next = th;
+							this->a.h = t;
+						}
+						else
+						{
+							Monom *tt = this->a.head();
+							while (tt->next != th) tt = tt->next;
+							t->next = tt->next;
+							tt->next = t;
+						}
+					}
+					if (th->verstka < mon->verstka)
+					{
+						th->next = t;
+						th = th->next;
+						th->next = NULL;
+					}
+					mon = mon->next;
+				}
+			}
+			this->a.check();
+			return *this;
+		}
+		if (th->next != NULL&&mon == NULL)
+		{
+			this->a.check();
+			return *this;
+		}
+		if (mon->verstka == th->verstka)
+		{
+			th->k += mon->k;
+		}
+		if (th->verstka > mon->verstka)
+		{
+			Monom *t = new Monom;
+			t->verstka = mon->verstka;
+			t->k = mon->k;
+			if (th == this->a.head())
+			{
+				t->next = th;
+				a.h = t;
+				th = this->a.head();
+			}
+			else
+			{
+				Monom *h = this->a.head();
+				while (h->next != th) h = h->next;
+				t->next = h->next;
+				h->next = t;
+				th = t;
+			}
+		}
+		if (th->verstka < mon->verstka)
+		{
+			while (th->next!=NULL)
+			{
+				if (th->next->verstka > mon->verstka) break;
+				else th = th->next;
+			}
+			
+			if (th->next == NULL)
+			{
+				if (th->verstka == mon->verstka)
+				{
+					th->k += mon->k;
+					mon = mon->next;
+				}
+				while (mon)
+				{
+					Monom *t = new Monom;
+					t->verstka = mon->verstka;
+					t->k = mon->k;
+					t->next = NULL;
 					th->next = t;
 					th = th->next;
 					th->next = NULL;
@@ -144,34 +197,19 @@ Polinom Polinom::operator+(Polinom & b)
 				this->a.check();
 				return *this;
 			}
-			if (th->next == NULL) return *this;
-			if (th->next->verstka == mon->verstka)
+			if (th->verstka == mon->verstka)
 			{
-				th->next->k += mon->k;
+				th->k += mon->k;
 			}
 			else
 			{
-				Monom *m = new Monom;
-				m->k = mon->k;
-				m->verstka = mon->verstka;
-				m->next = th->next;
-				th->next = m;
-			}
-		}
-		if (th==NULL&&mon!=NULL)
-		{
-			while (mon)
-			{
 				Monom *t = new Monom;
-				t->k = mon->k;
 				t->verstka = mon->verstka;
+				t->k = mon->k;
+				t->next = th->next;
 				th->next = t;
 				th = th->next;
-				th->next = NULL;
-				mon = mon->next;
 			}
-			this->a.check();
-			return *this;
 		}
 		th = th->next;
 		mon = mon->next;
@@ -195,47 +233,100 @@ Polinom Polinom::operator-(Polinom & b)
 	if (b.a.head() == NULL) return *this;
 	Monom *th = this->a.head();
 	Monom *mon = b.a.head();
-	while (th&&mon)
+	while (th != NULL && mon != NULL)
 	{
+		if (th->next == NULL&&mon != NULL)
+		{
+			while (mon)
+			{
+				if (th->verstka == mon->verstka)
+				{
+					th->k -= mon->k;
+					mon = mon->next;
+				}
+				else
+				{
+					Monom *t = new Monom;
+					t->k = mon->k;
+					t->verstka = mon->verstka;
+					t->next = NULL;
+					if (th->verstka > mon->verstka)
+					{
+						if (th == this->a.head())
+						{
+							t->next = th;
+							this->a.h = t;
+						}
+						else
+						{
+							Monom *tt = this->a.head();
+							while (tt->next != th) tt = tt->next;
+							t->next = tt->next;
+							tt->next = t;
+						}
+					}
+					if (th->verstka < mon->verstka)
+					{
+						th->next = t;
+						th = th->next;
+						th->next = NULL;
+					}
+					mon = mon->next;
+				}
+			}
+			this->a.check();
+			return *this;
+		}
+		if (th->next != NULL&&mon == NULL)
+		{
+			this->a.check();
+			return *this;
+		}
 		if (mon->verstka == th->verstka)
 		{
 			th->k -= mon->k;
 		}
-		if (mon->verstka < th->verstka&&th == this->a.head())
+		if (th->verstka > mon->verstka)
 		{
 			Monom *t = new Monom;
-			t->k =-1* mon->k;
 			t->verstka = mon->verstka;
-			t->next = th;
-			a.h = t;
-			th = this->a.head();
-		}
-		if (mon->verstka < th->verstka&&th != this->a.head())
-		{
-			Monom *t = this->a.head();
-			while (t->next != th)
+			t->k = mon->k;
+			if (th == this->a.head())
 			{
-				t = t->next;
+				t->next = th;
+				a.h = t;
+				th = this->a.head();
 			}
-			Monom *m = new Monom;
-			m->k =-1* mon->k;
-			m->verstka = mon->verstka;
-			t->next = m;
-			m->next = th;
-		}
-		if (mon->verstka > th->verstka)
-		{
-			while (th->next != NULL&&th->next->verstka < mon->verstka)
+			else
 			{
-				th = th->next;
+				Monom *h = this->a.head();
+				while (h->next != th) h = h->next;
+				t->next = h->next;
+				h->next = t;
+				th = t;
 			}
-			if (th->next == NULL&&mon != NULL)
+		}
+		if (th->verstka < mon->verstka)
+		{
+			while (th->next != NULL)
 			{
+				if (th->next->verstka > mon->verstka) break;
+				else th = th->next;
+			}
+
+			if (th->next == NULL)
+			{
+				if (th->verstka == mon->verstka)
+				{
+					th->k -= mon->k;
+					mon = mon->next;
+				}
 				while (mon)
 				{
 					Monom *t = new Monom;
-					t->k = -1*mon->k;
 					t->verstka = mon->verstka;
+					t->k = mon->k;
+					t->next = NULL;
 					th->next = t;
 					th = th->next;
 					th->next = NULL;
@@ -244,34 +335,19 @@ Polinom Polinom::operator-(Polinom & b)
 				this->a.check();
 				return *this;
 			}
-			if (th->next == NULL) return *this;
-			if (th->next->verstka == mon->verstka)
+			if (th->verstka == mon->verstka)
 			{
-				th->next->k -= mon->k;
+				th->k -= mon->k;
 			}
 			else
 			{
-				Monom *m = new Monom;
-				m->k =-1* mon->k;
-				m->verstka = mon->verstka;
-				m->next = th->next;
-				th->next = m;
-			}
-		}
-		if (th == NULL&&mon != NULL)
-		{
-			while (mon)
-			{
 				Monom *t = new Monom;
-				t->k = -1*mon->k;
 				t->verstka = mon->verstka;
+				t->k = mon->k;
+				t->next = th->next;
 				th->next = t;
 				th = th->next;
-				th->next = NULL;
-				mon = mon->next;
 			}
-			this->a.check();
-			return *this;
 		}
 		th = th->next;
 		mon = mon->next;
@@ -354,8 +430,9 @@ string Polinom::ReverseConvert()
 	string str = "";
 	while (t)
 	{
+		while (t->next!=NULL&&t->k == 0) t = t->next;
 		string k = "";
-		if (t->k > 0)k = k + "+";
+		if (t->k > 0) k = k + "+";
 		k = k + to_string(t->k);
 		int grz = t->verstka / 400;
 		int gry = (t->verstka - grz * 400) / 20;
