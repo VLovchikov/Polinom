@@ -424,16 +424,11 @@ double Polinom::Calculate(double xx, double yy, double zz)
 
 string Polinom::ReverseConvert()
 {
-	Monom *t = a.head();
+	this->a.check();
+	Monom *t = a.h;
 	string str = "";
 	while (t)
 	{
-		while (t->next!=NULL&&t->k == 0) t = t->next;
-		if (t->next == 0 && t->k == 0)
-		{
-			if (str == "") str = "0";
-			return str;
-		}
 		string k = "";
 		if (t->k > 0) k = k + "+";
 		k = k + to_string(t->k);

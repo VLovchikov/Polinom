@@ -1,10 +1,4 @@
-﻿  stdafx.cpp
-  TestMonom.cpp
+﻿  TestMonom.cpp
 a:\проекты\polinom\polinom\polinom\monomlist.cpp(7): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-  TestPolinom.cpp
-a:\проекты\polinom\polinom\polinom\polinom.cpp(15): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-a:\проекты\polinom\polinom\polinom\polinom.cpp(44): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-  TestMain.cpp
-  Создание кода...
   Unittest.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Unittest.exe
   Unittest.vcxproj -> A:\Проекты\Polinom\Polinom\x64\Debug\Unittest.pdb (Full PDB)
