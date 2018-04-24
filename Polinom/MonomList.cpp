@@ -139,10 +139,15 @@ void MonomList::check()
 	if (h == NULL) return;
 	if (h->k == 0)
 	{
-		Monom *t = h;
+
 		if (h->next == NULL) return;
-		h = h->next;
-		delete t;
+		while (h->next != NULL && h->k == 0)
+		{
+			Monom *t = h;
+			h = h->next;
+			t->next = NULL;
+			delete t;
+		}
 	}
 	Monom *t = h;
 	while (t->next!=NULL)
@@ -169,7 +174,7 @@ void MonomList::check()
 				return;
 			}
 	}
-
+	return;
 }
 
 void MonomList::print()
